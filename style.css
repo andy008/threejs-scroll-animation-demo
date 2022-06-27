@@ -1,4 +1,5 @@
-@import url("https://use.typekit.net/jmk3xov.css");
+/*@import url("https://use.typekit.net/jmk3xov.css");*/
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400);
 
 canvas {
   position: fixed;
@@ -11,7 +12,7 @@ canvas {
   --dark-bg: rgba(15, 15, 15, 0.95);
   --spacing: 350px;
 
-  font-family: brandon-grotesque, sans-serif;
+  font-family: 'Playfair Display', sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -31,7 +32,7 @@ main {
 }
 
 h1, h2, h3, blockquote {
-  font-family: elevon, sans-serif;
+  font-family: 'Playfair Display', sans-serif;
   font-weight: 700;
   font-style: normal;
 }
@@ -73,7 +74,7 @@ canvas {
     background-color: white;
     font-size: 4rem;
     display: inline;
-    line-height: 1;
+    line-height: 1.5;
   }
 
   .left {
