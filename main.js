@@ -22,7 +22,7 @@ renderer.render(scene, camera);
 // Torus
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
+const material = new THREE.MeshStandardMaterial({ color: 0x033F98 });
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
@@ -43,20 +43,34 @@ scene.add(pointLight, ambientLight);
 
 // const controls = new OrbitControls(camera, renderer.domElement);
 
-function addStar() {
-  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
-  const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-  const star = new THREE.Mesh(geometry, material);
+function addStar(){
 
-  const [x, y, z] = Array(3)
-    .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(100));
+  // The loop will move from z position of -1000 to z position 1000, adding a random particle at each position. 
+  for ( var z= -500; z < 500; z+=20 ) {
 
-  star.position.set(x, y, z);
-  scene.add(star);
+    // Make a sphere (exactly the same as before). 
+    var geometry   = new THREE.SphereGeometry(0.5, 32, 32)
+    var material = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+    var sphere = new THREE.Mesh(geometry, material)
+
+    // This time we give the sphere random x and y positions between -500 and 500
+    sphere.position.x = Math.random() * 1000 - 500;
+    sphere.position.y = Math.random() * 1000 - 500;
+
+    // Then set the z position to where it is in the loop (distance of camera)
+    sphere.position.z = z;
+
+    // scale it up a bit
+    sphere.scale.x = sphere.scale.y = 2;
+
+    //add the sphere to the scene
+    scene.add( sphere );
+
+  }
 }
 
-Array(200).fill().forEach(addStar);
+
+addStar();
 
 // Background
 
@@ -65,7 +79,7 @@ scene.background = spaceTexture;
 
 // Avatar
 
-const jeffTexture = new THREE.TextureLoader().load('jeff.png');
+const jeffTexture = new THREE.TextureLoader().load('ive.png');
 
 const jeff = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: jeffTexture }));
 
@@ -96,9 +110,9 @@ jeff.position.x = 2;
 
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
-  moon.rotation.x += 0.05;
-  moon.rotation.y += 0.075;
-  moon.rotation.z += 0.05;
+  //moon.rotation.x += 0.05;
+  //moon.rotation.y += 0.075;
+  //moon.rotation.z += 0.05;
 
   jeff.rotation.y += 0.01;
   jeff.rotation.z += 0.01;
@@ -120,7 +134,7 @@ function animate() {
   torus.rotation.y += 0.005;
   torus.rotation.z += 0.01;
 
-  moon.rotation.x += 0.005;
+  moon.rotation.y += 0.005;
 
   // controls.update();
 
